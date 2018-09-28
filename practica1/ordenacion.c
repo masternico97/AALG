@@ -33,6 +33,22 @@ int minimo(int *tabla, int ip, int iu){
   }
 return(val);
 }
+int maximo(int *tabla, int ip, int iu){
+  int i;
+  int val = ip;
+
+  if((!tabla)||(ip<0)||(iu<ip)){
+    return ERR;
+  }
+
+  for(i = ip;i < iu;i++){
+    if(tabla[i+1]>tabla[val]){/*operación básica*/
+      val = i+1;
+    }
+
+  }
+return(val);
+}
 /***************************************************/
 /* Funcion: SelectSort    Fecha:28/09/2018         */
 /* Vuestro comentario: esta función busca el       */
@@ -60,7 +76,20 @@ int SelectSort(int *tabla, int ip, int iu){
 
 int SelectSortInv(int* tabla, int ip, int iu)
 {
-  /* vuestro codigo */
+  int i,max,sum = 0;
+  if((!tabla)||(ip<0)||(iu<ip)){
+    return ERR;
+  }
+
+  for(i = ip;i < iu;i++){
+    max = maximo(tabla, i, iu);
+    if(max == ERR){
+    return ERR;
+    }
+    sum += iu-i;
+    swap(&tabla[i], &tabla[max]);
+  }
+  return sum;
 }
 
 
