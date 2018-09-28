@@ -12,7 +12,7 @@
 #include "permutaciones.h"
 #include "ordenacion.h"
 /***************************************************/
-/* Funcion: SelectSort    Fecha:28/09/2018         */
+/* Funcion: minimo    Fecha:28/09/2018             */
 /* Vuestro comentario: esta función busca el       */
 /*elemento más pequeño y devuelve la posición de   */
 /*la tabla en la que se sitúa                      */
