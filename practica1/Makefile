@@ -68,12 +68,12 @@ ejercicio3_valgrind:
 
 ejercicio4_test:
 	@echo Ejecutando ejercicio4
-	@./ejercicio4 -tamanio 1
+	@./ejercicio4 -tamanio 10
 
 
 ejercicio4_valgrind:
 	@echo Ejecutando ejercicio4 con valgrind
-	valgrind --leak-check=full ./ejercicio4 -tamanio 1
+	valgrind --leak-check=full ./ejercicio4 -tamanio 10
 
 ejercicio5_test:
 	@echo Ejecutando ejercicio5
