@@ -75,7 +75,7 @@ int aleat_num(int inf, int sup)
 int* genera_perm(int N)
 {
   int* perm = NULL;
-  int i = 1;
+  int i;
 
   if(N<1){
     return NULL;

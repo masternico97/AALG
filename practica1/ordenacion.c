@@ -110,5 +110,3 @@ int SelectSortInv(int* tabla, int ip, int iu)
   }
   return sum;
 }
-
-
