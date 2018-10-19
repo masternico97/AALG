@@ -46,7 +46,7 @@ aleatoriedad.o: aleatoriedad.c
 
 aleatoriedad: aleatoriedad.o permutaciones.o
 	$(CC) $(CFLAGS) -o aleatoriedad aleatoriedad.o permutaciones.o
-	
+
 ejercicio1_test:
 	@echo Ejecutando ejercicio1
 	@./ejercicio1 -limInf 1 -limSup 5 -numN 10
@@ -85,19 +85,14 @@ ejercicio5_test:
 	@echo Ejecutando ejercicio5
 	@./ejercicio5 -num_min 500 -num_max 10000 -incr 500 -numP 10 -fichSalida ejercicio5.log
 
-
 ejercicio5_valgrind:
 	@echo Ejecutando ejercicio5 con valgrind
-	valgrind --track-origins=yes --leak-check=full ./ejercicio5 -num_min 1000 -num_max 10000 -incr 1000 -numP 5 -fichSalida ejercicio5.log
+	valgrind --track-origins=yes --leak-check=full ./ejercicio5 -num_min 1000 -num_max 10000 -incr 100 -numP 2 -fichSalida ejercicio5.log
 
 ejercicio6_test:
 	@echo Ejecutando ejercicio6
 	@./ejercicio6 -num_min 500 -num_max 10000 -incr 500 -numP 10 -fichSalida ejercicio6.log
 
-
 ejercicio6_valgrind:
 	@echo Ejecutando ejercicio6 con valgrind
-	valgrind --track-origins=yes --leak-check=full ./ejercicio6 -num_min 1000 -num_max 10000 -incr 1000 -numP 5 -fichSalida ejercicio6.log
-
-
-
+	valgrind --track-origins=yes --leak-check=full ./ejercicio6 -num_min 1000 -num_max 10000 -incr 100 -numP 2 -fichSalida ejercicio6.log
