@@ -8,7 +8,8 @@
  * Fecha: 28-09-2018
  *
  */
-
+#include <stdio.h>
+#include <stdlib.h>
 #include "permutaciones.h"
 #include "ordenacion.h"
 /***************************************************/
@@ -92,6 +93,52 @@ int SelectSort(int *tabla, int ip, int iu){
 /*para colocar el elemento mas grande exclullendo  */
 /*las casillas ya ordenadas de la tabla            */
 /***************************************************/
+int merge(int* tabla, int ip, int iu, int imedio){
+  int i = ip;
+  int j = imedio+1;
+  int k = 0;
+  int op = 0;
+  int* taux = NULL;
+  if((!tabla)||(ip<0)||(iu<ip)||(imedio>iu)||(imedio<ip)){
+    return ERR;
+  }
+  if(ip==iu){
+    return 0;
+  }
+  taux = (int*)malloc((iu-ip+1)*sizeof(int));
+  if(!taux){
+    return ERR;
+  }
+  while(i<=imedio && j<=iu){
+    op++;
+    if(tabla[i]<tabla[j]){
+      taux[k]=tabla[i];
+      i++;
+    }else{
+      taux[k]=tabla[j];
+      j++;
+    }
+    k++;
+  }
+  if(i>imedio){
+    while(j<=iu){
+      taux[k]=tabla[j];
+      j++;
+      k++;
+    }
+  }else if(j>iu){
+    while(i<=imedio){
+      taux[k]=tabla[i];
+      i++;
+      k++;
+    }
+  }
+  for(i=ip,k=0;i<=iu;i++,k++){
+    tabla[i]=taux[k];
+  }
+  free(taux);
+  return op;
+}
 
 int SelectSortInv(int* tabla, int ip, int iu)
 {
@@ -110,3 +157,17 @@ int SelectSortInv(int* tabla, int ip, int iu)
   }
   return sum;
 }
+int MergeSort(int* tabla, int ip, int iu){
+  int M;
+  if((!tabla)||(ip<0)||(iu<ip)){
+    return ERR;
+  }
+  if(ip==iu){
+    return 0;
+  }
+  else{
+  M=(ip+iu)/2;
+  return MergeSort(tabla,ip,M)+MergeSort(tabla,M+1,iu)+merge(tabla,ip,iu,M);
+  }
+}
+
