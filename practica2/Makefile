@@ -41,12 +41,6 @@ permutaciones.o : permutaciones.c permutaciones.h
 	@echo "# Ha cambiado $<"
 	$(CC) $(CFLAGS) -c $<
 
-aleatoriedad.o: aleatoriedad.c
-	$(CC) $(CFLAGS) -c aleatoriedad.c
-
-aleatoriedad: aleatoriedad.o permutaciones.o
-	$(CC) $(CFLAGS) -o aleatoriedad aleatoriedad.o permutaciones.o
-
 ejercicio4_test:
 	@echo Ejecutando ejercicio4
 	@./ejercicio4 -tamanio 10
@@ -62,4 +56,4 @@ ejercicio5_test:
 
 ejercicio5_valgrind:
 	@echo Ejecutando ejercicio5 con valgrind
-	valgrind --track-origins=yes --leak-check=full ./ejercicio5 -num_min 1000 -num_max 10000 -incr 50 -numP 100 -fichSalida QuickSort.log
+	valgrind --track-origins=yes --leak-check=full ./ejercicio5 -num_min 1000 -num_max 10000 -incr 50 -numP 100 -fichSalida ejercicio5.log
