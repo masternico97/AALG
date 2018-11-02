@@ -93,6 +93,25 @@ int SelectSort(int *tabla, int ip, int iu){
 /*para colocar el elemento mas grande exclullendo  */
 /*las casillas ya ordenadas de la tabla            */
 /***************************************************/
+
+int SelectSortInv(int* tabla, int ip, int iu)
+{
+  int i,max,sum = 0;
+  if((!tabla)||(ip<0)||(iu<ip)){
+    return ERR;
+  }
+
+  for(i = ip;i < iu;i++){
+    max = maximo(tabla, i, iu);
+    if(max == ERR){
+    return ERR;
+    }
+    sum += iu-i;
+    swap(&tabla[i], &tabla[max]);
+  }
+  return sum;
+}
+
 int merge(int* tabla, int ip, int iu, int imedio){
   int i = ip;
   int j = imedio+1;
@@ -140,23 +159,7 @@ int merge(int* tabla, int ip, int iu, int imedio){
   return op;
 }
 
-int SelectSortInv(int* tabla, int ip, int iu)
-{
-  int i,max,sum = 0;
-  if((!tabla)||(ip<0)||(iu<ip)){
-    return ERR;
-  }
 
-  for(i = ip;i < iu;i++){
-    max = maximo(tabla, i, iu);
-    if(max == ERR){
-    return ERR;
-    }
-    sum += iu-i;
-    swap(&tabla[i], &tabla[max]);
-  }
-  return sum;
-}
 int MergeSort(int* tabla, int ip, int iu){
   int M;
   if((!tabla)||(ip<0)||(iu<ip)){
@@ -171,3 +174,98 @@ int MergeSort(int* tabla, int ip, int iu){
   }
 }
 
+
+/***************************************************/
+/* Funcion: medio    Fecha:26/10/2018   	         */
+/* Vuestro comentario: 			                       */
+/***************************************************/
+
+
+int medio(int *tabla, int ip, int iu, int *pos){
+
+	if(!tabla || ip < 0 || iu < ip || !pos){
+		return ERR;
+	}
+
+	*pos = ip;
+	return OK;
+}
+
+
+/***************************************************/
+/* Funcion: partir    Fecha:26/10/2018   	         */
+/* Vuestro comentario: 			                       */
+/***************************************************/
+
+
+int partir(int* tabla, int ip, int iu,int *pos){
+
+	int OB, pivote, i;
+
+	if(!tabla || ip < 0 || iu < ip || !pos){
+		return ERR;
+	}
+
+	OB=medio(tabla, ip, iu, pos);
+	if(OB==ERR){
+		return ERR;	
+	}
+
+	pivote=tabla[*pos];
+
+	swap(&tabla[ip], &tabla[*pos]);
+	*pos=ip;
+
+	for(i=ip+1; i<=iu; i++){
+		OB++;
+		if(tabla[i]<pivote){
+			(*pos)++;	
+			swap(&tabla[i], &tabla[*pos]);	
+		}
+	}
+	swap(&tabla[ip], &tabla[*pos]);
+	return OB;
+}
+
+/***************************************************/
+/* Funcion: QuickSort    Fecha:26/10/2018          */
+/* Vuestro comentario: esta función busca el       */
+/*elemento más grande y lo coloca en la primera    */
+/*posición, acortando la tabla en cada ejecución   */
+/*para colocar el elemento mas grande exclullendo  */
+/*las casillas ya ordenadas de la tabla            */
+/***************************************************/
+
+int QuickSort(int* tabla, int ip, int iu){
+	int OB, pos, comprobacion;	
+
+	if(!tabla || ip < 0 || iu < ip){
+		return ERR;
+	}
+	
+	if(ip==iu){
+		return 0;
+	}
+
+	OB=partir(tabla ,ip ,iu ,&pos);
+	if(OB==ERR){
+		return ERR;
+	}
+
+	if(ip<pos-1){
+		comprobacion=QuickSort(tabla, ip, pos-1);
+		if(comprobacion==ERR){
+			return ERR;
+		}
+		OB+=comprobacion;
+	}
+
+	if(pos+1<iu){
+		comprobacion=QuickSort(tabla, pos+1, iu);
+		if(comprobacion==ERR){
+			return ERR;
+		}
+		OB+=comprobacion;
+	}
+	return OB;
+}
