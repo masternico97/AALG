@@ -27,6 +27,8 @@ typedef int (* pfunc_ordena)(int*, int, int);
 int SelectSort(int* tabla, int ip, int iu);
 int SelectSortInv(int* tabla, int ip, int iu);
 int MergeSort(int* tabla, int ip, int iu);
+int QuickSort(int* tabla, int ip, int iu);
+
 
 
 #endif
