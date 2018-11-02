@@ -53,7 +53,7 @@ int aleat_num(int inf, int sup)
         return ERR;
     }
 
-    return (int) (inf + (double) rand() / (RAND_MAX - 1)*(sup - inf + 1));
+    return (int) (inf + (double) rand() / (RAND_MAX + 1.0)*(sup - inf + 1));
 
 }
 
