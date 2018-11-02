@@ -269,3 +269,67 @@ int QuickSort(int* tabla, int ip, int iu){
 	}
 	return OB;
 }
+/***************************************************/
+/* Funcion: QuickSort_src    Fecha:02/11/2018          */
+/* Vuestro comentario: esta función busca el       */
+/*elemento más grande y lo coloca en la primera    */
+/*posición, acortando la tabla en cada ejecución   */
+/*para colocar el elemento mas grande exclullendo  */
+/*las casillas ya ordenadas de la tabla            */
+/***************************************************/
+int QuickSort_src(int* tabla, int ip, int iu){
+	int OB, i, pos, comprobacion;
+	int* array = NULL;
+	OB = 0;	
+	i = 0;
+
+	if(!tabla || ip < 0 || iu < ip){
+		return ERR;
+	}
+	
+	if(ip==iu){
+		return 0;
+	}
+
+
+	array =(int*)malloc((iu-ip+1)*sizeof(int));
+	if(!array)return ERR;
+
+	OB=partir(tabla ,ip ,iu ,&pos);
+	if(OB==ERR){
+		return ERR;
+	}
+
+	array[i] = iu;
+	i++;
+	while(ip<(pos-1)){
+		if(!tabla || ip < 0 || iu < ip){
+			return ERR;
+		}
+	
+		if(ip==iu){
+			OB += 0;
+		}
+		iu = pos-1;
+		OB+=partir(tabla ,ip ,iu ,&pos);
+		array[i] = iu;
+		i++;
+	}
+	while((pos+1)<iu){
+		if(!tabla || ip < 0 || iu < ip){
+			return ERR;
+		}
+	
+		if(ip==iu){
+			OB += 0;
+		}
+		ip = pos+1;
+		OB+=partir(tabla ,ip ,iu ,&pos);
+		iu = array[i-1];
+		i--;
+		pos = iu+1;
+	}
+	free(array);
+	if(OB < 0)return ERR;
+	return OB;
+}
