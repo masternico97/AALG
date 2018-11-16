@@ -301,21 +301,22 @@ int QuickSort_src(int* tabla, int ip, int iu){
 		OB+=comprobacion;
 	}
 
-	if(pos+1<iu){
-		while(pos+1<iu){
-			if(!tabla || ip < 0 || iu < ip){
-				return ERR;
-			}
-			ip = pos+1;
-			comprobacion = partir(tabla ,ip ,iu ,&pos);
-			if(ip==iu){
-				return OB;
-			}
-			if(ip<pos-1){
-				OB+=QuickSort(tabla, ip, pos-1);
-			}
-			OB+=comprobacion;
+	while(pos+1<iu){
+		ip = pos+1;
+		if(!tabla || ip < 0 || iu < ip){
+			return ERR;
 		}
-	}
+		if(ip==iu){
+			return OB;
+		}
+		comprobacion = partir(tabla ,ip ,iu ,&pos);
+		if(ip<pos-1){
+			comprobacion+=QuickSort(tabla, ip, pos-1);
+		}
+		if(comprobacion==ERR){
+			return ERR;
+		}
+		OB+=comprobacion;
+		}
 	return OB;
-}
+	}
