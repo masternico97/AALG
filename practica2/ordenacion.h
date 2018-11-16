@@ -28,6 +28,7 @@ int SelectSort(int* tabla, int ip, int iu);
 int SelectSortInv(int* tabla, int ip, int iu);
 int MergeSort(int* tabla, int ip, int iu);
 int QuickSort(int* tabla, int ip, int iu);
+int QuickSort_src(int* tabla, int ip, int iu);
 
 
 
