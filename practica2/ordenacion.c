@@ -112,6 +112,12 @@ int SelectSortInv(int* tabla, int ip, int iu)
   return sum;
 }
 
+
+/***************************************************/
+/* Funcion: merge    Fecha:26/10/2018          */
+/* Vuestro comentario: 			           */
+/***************************************************/
+
 int merge(int* tabla, int ip, int iu, int imedio){
   int i = ip;
   int j = imedio+1;
@@ -160,6 +166,12 @@ int merge(int* tabla, int ip, int iu, int imedio){
 }
 
 
+/***************************************************/
+/* Funcion: MergeSort    Fecha:26/10/2018          */
+/* Vuestro comentario: 			           */
+/***************************************************/
+
+
 int MergeSort(int* tabla, int ip, int iu){
   int M;
   if((!tabla)||(ip<0)||(iu<ip)){
@@ -176,8 +188,8 @@ int MergeSort(int* tabla, int ip, int iu){
 
 
 /***************************************************/
-/* Funcion: medio    Fecha:26/10/2018   	         */
-/* Vuestro comentario: 			                       */
+/* Funcion: medio    Fecha:26/10/2018   	   */
+/* Vuestro comentario:		                   */
 /***************************************************/
 
 
@@ -193,8 +205,8 @@ int medio(int *tabla, int ip, int iu, int *pos){
 
 
 /***************************************************/
-/* Funcion: partir    Fecha:26/10/2018   	         */
-/* Vuestro comentario: 			                       */
+/* Funcion: partir    Fecha:26/10/2018   	   */
+/* Vuestro comentario: 			           */
 /***************************************************/
 
 
@@ -229,11 +241,7 @@ int partir(int* tabla, int ip, int iu,int *pos){
 
 /***************************************************/
 /* Funcion: QuickSort    Fecha:26/10/2018          */
-/* Vuestro comentario: esta función busca el       */
-/*elemento más grande y lo coloca en la primera    */
-/*posición, acortando la tabla en cada ejecución   */
-/*para colocar el elemento mas grande exclullendo  */
-/*las casillas ya ordenadas de la tabla            */
+/* Vuestro comentario: 			           */
 /***************************************************/
 
 int QuickSort(int* tabla, int ip, int iu){
@@ -269,13 +277,10 @@ int QuickSort(int* tabla, int ip, int iu){
 	}
 	return OB;
 }
+
 /***************************************************/
-/* Funcion: QuickSort_src    Fecha:02/11/2018          */
-/* Vuestro comentario: esta función busca el       */
-/*elemento más grande y lo coloca en la primera    */
-/*posición, acortando la tabla en cada ejecución   */
-/*para colocar el elemento mas grande exclullendo  */
-/*las casillas ya ordenadas de la tabla            */
+/* Funcion: QuickSort_src    Fecha:02/11/2018      */
+/* Vuestro comentario: 			           */
 /***************************************************/
 int QuickSort_src(int* tabla, int ip, int iu){
 	int OB, pos, comprobacion;	
@@ -317,6 +322,6 @@ int QuickSort_src(int* tabla, int ip, int iu){
 			return ERR;
 		}
 		OB+=comprobacion;
-		}
-	return OB;
 	}
+	return OB;
+}
