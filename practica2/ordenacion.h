@@ -31,5 +31,4 @@ int QuickSort(int* tabla, int ip, int iu);
 int QuickSort_src(int* tabla, int ip, int iu);
 
 
-
 #endif
