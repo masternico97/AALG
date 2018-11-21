@@ -14,10 +14,8 @@
 
 /* constantes */
 
-#ifndef ERR
-  #define ERR -1
-  #define OK (!(ERR))
-#endif
+#define ERR -1
+#define OK (!(ERR))
 
 /* definiciones de tipos */
 typedef int (* pfunc_ordena)(int*, int, int);

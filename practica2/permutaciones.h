@@ -15,8 +15,8 @@
 /* constantes */
 
 #ifndef ERR
-  #define ERR -1
-  #define OK (!(ERR))
+#define ERR -1
+#define OK (!(ERR))
 #endif
 
 void swap(int* a, int* b);

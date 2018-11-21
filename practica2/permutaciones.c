@@ -13,30 +13,29 @@
 #include "permutaciones.h"
 #include <stdlib.h>
 
-
 /***************************************************/
 /* Funcion: aleat_num Fecha: 21-9-2018             */
-/* Autores: Miguel Luque y Nicolás Serrano         */
+/* Autores: Miguel Luque y Nicolás Serrano        */
 /*                                                 */
-/* Rutina que intercambia dos números              */
+/* Rutina que intercambia dos números             */
 /*                                                 */
 /* Entrada:                                        */
-/* int* a: primer número                            */
-/* int* b: segundo número                           */
+/* int* a: primer número                          */
+/* int* b: segundo número                         */
 /***************************************************/
-void swap(int* a, int* b){
-	int tmp;
+void swap(int* a, int* b) {
+    int tmp;
 
-	if(a && b){
-		tmp = *a;
-		*a =*b;
-		*b=tmp;
-	}
+    if (a && b) {
+        tmp = *a;
+        *a = *b;
+        *b = tmp;
+    }
 }
 
 /***************************************************/
 /* Funcion: aleat_num Fecha: 21-9-2018             */
-/* Autores: Miguel Luque y Nicolás Serrano         */
+/* Autores: Miguel Luque y Nicolás Serrano        */
 /*                                                 */
 /* Rutina que genera un numero aleatorio           */
 /* entre dos numeros dados                         */
@@ -47,8 +46,7 @@ void swap(int* a, int* b){
 /* Salida:                                         */
 /* int: numero aleatorio                           */
 /***************************************************/
-int aleat_num(int inf, int sup)
-{
+int aleat_num(int inf, int sup) {
     if (sup < inf) {
         return ERR;
     }
@@ -72,29 +70,28 @@ int aleat_num(int inf, int sup)
 /* que contiene a la permutacion                   */
 /* o NULL en caso de error                         */
 /***************************************************/
-int* genera_perm(int N)
-{
-  int* perm = NULL;
-  int i;
+int* genera_perm(int N) {
+    int* perm = NULL;
+    int i;
 
-  if(N<1){
-    return NULL;
-  }
+    if (N < 1) {
+        return NULL;
+    }
 
-  perm = (int*)malloc(N*sizeof(int));
-  if(perm==NULL){
-    return NULL;
-  }
+    perm = (int*) malloc(N * sizeof (int));
+    if (perm == NULL) {
+        return NULL;
+    }
 
-  for(i=1;i<=N;i++){
-    perm[i-1] = i;
-  }
+    for (i = 1; i <= N; i++) {
+        perm[i - 1] = i;
+    }
 
-  for(i=1;i<=N;i++){
-    swap(&perm[i-1], &perm[aleat_num(i-1,N-1)]);
-  }
+    for (i = 1; i <= N; i++) {
+        swap(&perm[i - 1], &perm[aleat_num(i - 1, N - 1)]);
+    }
 
-  return(perm);
+    return (perm);
 }
 
 /***************************************************/
@@ -114,29 +111,28 @@ int* genera_perm(int N)
 /* permutaciones                                   */
 /* NULL en caso de error                           */
 /***************************************************/
-int** genera_permutaciones(int n_perms, int N)
-{
-	int** matriz = NULL;
-	int i;	
+int** genera_permutaciones(int n_perms, int N) {
+    int** matriz = NULL;
+    int i;
 
-	if(n_perms < 1 || N < 1){
-		return NULL;
-	}
-	
-	matriz = (int**) malloc(n_perms*sizeof(int*));
-	if(!matriz){
-		return NULL;
-	}
-	
-	for(i=0; i<n_perms; i++){
-		matriz[i]=genera_perm(N);
-		if(!matriz[i]){
-			for(i=i-1; i>=0; i--){
-				free(matriz[i]);
-			}
-			free(matriz);
-			return NULL;
-		}
-	}
-	return matriz;
+    if (n_perms < 1 || N < 1) {
+        return NULL;
+    }
+
+    matriz = (int**) malloc(n_perms * sizeof (int*));
+    if (!matriz) {
+        return NULL;
+    }
+
+    for (i = 0; i < n_perms; i++) {
+        matriz[i] = genera_perm(N);
+        if (!matriz[i]) {
+            for (i = i - 1; i >= 0; i--) {
+                free(matriz[i]);
+            }
+            free(matriz);
+            return NULL;
+        }
+    }
+    return matriz;
 }
