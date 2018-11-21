@@ -15,55 +15,54 @@
 #include "permutaciones.h"
 #include "ordenacion.h"
 
-int main(int argc, char** argv)
-{
-  int tamano, i, j, ret;
-  int* perm = NULL;
+int main(int argc, char** argv) {
+    int tamano, i, j, ret;
+    int* perm = NULL;
 
-  srand(time(NULL));
+    srand(time(NULL));
 
-  if (argc != 3) {
-    fprintf(stderr, "Error en los parametros de entrada:\n\n");
-    fprintf(stderr, "%s -tamanio <int>\n", argv[0]);
-    fprintf(stderr, "Donde:\n");
-    fprintf(stderr, " -tamanio : numero elementos permutacion.\n");
-    return 0;
-  }
-  printf("Practica numero 1, apartado 4\n");
-  printf("Realizada por: Nicolas Serrano y Miguel Luque\n");
-  printf("Grupo: 1212\n");
-
-  /* comprueba la linea de comandos */
-  for(i = 1; i < argc; i++) {
-    if (strcmp(argv[i], "-tamanio") == 0) {
-      tamano = atoi(argv[++i]);
-    } else {
-      fprintf(stderr, "Parametro %s es incorrecto\n", argv[i]);
+    if (argc != 3) {
+        fprintf(stderr, "Error en los parametros de entrada:\n\n");
+        fprintf(stderr, "%s -tamanio <int>\n", argv[0]);
+        fprintf(stderr, "Donde:\n");
+        fprintf(stderr, " -tamanio : numero elementos permutacion.\n");
+        return 0;
     }
-  }
+    printf("Practica numero 1, apartado 4\n");
+    printf("Realizada por: Nicolas Serrano y Miguel Luque\n");
+    printf("Grupo: 1212\n");
 
-  perm = genera_perm(tamano);
+    /* comprueba la linea de comandos */
+    for (i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "-tamanio") == 0) {
+            tamano = atoi(argv[++i]);
+        } else {
+            fprintf(stderr, "Parametro %s es incorrecto\n", argv[i]);
+        }
+    }
 
-  if (perm == NULL) { /* error */
-    printf("Error: No hay memoria\n");
-    exit(-1);
-  }
+    perm = genera_perm(tamano);
 
-  ret = SelectSort(perm, 0, tamano-1);
+    if (perm == NULL) { /* error */
+        printf("Error: No hay memoria\n");
+        exit(-1);
+    }
 
-  if (ret == ERR) {
-    printf("Error: Error en BubbleSort\n");
+    ret = SelectSort(perm, 0, tamano - 1);
+
+    if (ret == ERR) {
+        printf("Error: Error en BubbleSort\n");
+        free(perm);
+        exit(-1);
+    }
+
+    for (j = 0; j < tamano; j++) {
+        printf("%d \t", perm[j]);
+    }
+    printf("\n");
+
     free(perm);
-    exit(-1);
-  }
 
-  for(j = 0; j < tamano; j++) {
-    printf("%d \t", perm[j]);
-  }
-  printf("\n");
-
-  free(perm);
-
-  return 0;
+    return 0;
 }
 
