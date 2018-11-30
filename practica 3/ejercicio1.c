@@ -39,8 +39,8 @@ int main(int argc, char** argv)
   }
 
   printf("Practica numero 3, apartado 1\n");
-  printf("Realizada por: Vuestros nombres\n");
-  printf("Grupo: Vuestro grupo\n");
+  printf("Realizada por: Nicolas Serrano y Miguel Luque Lopez\n");
+  printf("Grupo: 1212\n");
 
   /* comprueba la linea de comandos */
   for(i = 1; i < argc; i++) {
@@ -53,7 +53,7 @@ int main(int argc, char** argv)
     }
   }
 
-  pdicc = ini_diccionario(tamanio,NO_ORDENADO);
+  pdicc = ini_diccionario(tamanio,ORDENADO);
 
   if (pdicc == NULL) {
     /* error */
@@ -80,7 +80,7 @@ int main(int argc, char** argv)
     exit(-1);
   }
 
-  nob = busca_diccionario(pdicc,clave,&pos,blin);
+  nob = busca_diccionario(pdicc,clave,&pos,bbin);
 
   if(nob >= 0) {
     printf("Clave %d encontrada en la posicion %d en %d op. basicas\n",clave,pos,nob);
@@ -95,4 +95,3 @@ int main(int argc, char** argv)
 
   return 0;
 }
-

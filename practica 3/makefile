@@ -40,13 +40,11 @@ permutaciones.o : permutaciones.c permutaciones.h
 	@echo "# Depende de $^"
 	@echo "# Ha cambiado $<"
 	$(CC) $(CFLAGS) -c $<
-	
+
 ejercicio1_test:
 	@echo Ejecutando ejercicio1
 	@./ejercicio1 -tamanio 10 -clave 5
 
 ejercicio2_test:
 	@echo Ejecutando ejercicio2
-	@./ejercicio2 -num_min 10 -num_max 100 -incr 10 -n_veces 1 -fichSalida busqueda.dat
-
-
+	@./ejercicio2 -num_min 1000 -num_max 10000 -incr 50 -n_veces 100 -fichSalida busqueda.dat

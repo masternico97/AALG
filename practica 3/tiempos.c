@@ -11,6 +11,7 @@
 
 #include "tiempos.h"
 #include "permutaciones.h"
+#include "busqueda.h"
 #include <time.h>
 #include <limits.h>
 #include <stdio.h>
@@ -142,9 +143,108 @@ short guarda_tabla_tiempos(char* fichero, PTIEMPO tiempo, int n_tiempos) {
 /***************************************************/
 /* Funcion: genera_tiempos_busqueda Fecha:         */
 /***************************************************/
-short genera_tiempos_busqueda(pfunc_busqueda metodo, pfunc_generador_claves generador, int orden, char* fichero, int num_min, int num_max, int incr, int n_veces);
+short genera_tiempos_busqueda(pfunc_busqueda metodo, pfunc_generador_claves generador, int orden, char* fichero, int num_min, int num_max, int incr, int n_veces){
+  int i, tam, retorno;
+  PTIEMPO tiempo = NULL;
+  if(!metodo || !generador || (orden != NO_ORDENADO && orden != ORDENADO)|| n_veces < 1 ||num_max<num_min||!fichero||incr<1||n_veces<1) return ERR;
+
+  /*Numero de veces que se repite tiempo_medio_ordenacion*/
+  tam = ((num_max - num_min) / incr) + 1;
+
+  tiempo = (PTIEMPO) malloc(tam * sizeof (TIEMPO));
+  if (!tiempo) {
+      return ERR;
+  }
+
+  for (i = 0; i < tam; i++) {
+      if (tiempo_medio_busqueda(metodo, generador, orden, num_min + (incr * i), n_veces, &tiempo[i]) == ERR) {
+          free(tiempo);
+          return ERR;
+      }
+  }
+
+  retorno = guarda_tabla_tiempos(fichero, tiempo, tam);
+  free(tiempo);
+  return retorno;
+}
 
 /***************************************************/
 /* Funcion: tiempo_medio_busqueda Fecha:           */
 /***************************************************/
-short tiempo_medio_busqueda(pfunc_busqueda metodo, pfunc_generador_claves generador, int orden, int N, int n_veces, PTIEMPO ptiempo);
+short tiempo_medio_busqueda(pfunc_busqueda metodo, pfunc_generador_claves generador, int orden, int N, int n_veces, PTIEMPO ptiempo){
+  PDICC pdicc = NULL;
+  int* perm = NULL;
+  int* tabla = NULL;
+  int ppos;
+  int n_claves, i, min, max;
+  short comprobacion;
+  double counter, start_t, end_t, total_t = 0;
+
+  if(!metodo || !generador || (orden != NO_ORDENADO && orden != ORDENADO) || N < 1 || n_veces < 1 || !ptiempo) return ERR;
+
+  pdicc = ini_diccionario(N, orden);
+  if(!pdicc) return ERR;
+
+  perm = genera_perm(N);
+  if (!perm){
+    libera_diccionario(pdicc);
+    return ERR;
+  }
+
+  comprobacion = insercion_masiva_diccionario(pdicc, perm, N);
+  free(perm);
+
+  if(comprobacion == ERR){
+    libera_diccionario(pdicc);
+    return ERR;
+  }
+
+  n_claves = N*n_veces;
+  tabla = (int*) malloc (n_claves * sizeof(int));
+  if(!tabla){
+    libera_diccionario(pdicc);
+    return ERR;
+  }
+
+  generador(tabla, n_claves, N);
+
+  min = INT_MAX;
+  max = INT_MIN;
+
+  start_t = clock();
+  for(i=0; i<n_claves; i++){
+
+    comprobacion = busca_diccionario(pdicc, tabla[i], &ppos, metodo);
+
+    if (comprobacion == ERR) {
+        free(tabla);
+        libera_diccionario(pdicc);
+        return ERR;
+    }
+
+    if (comprobacion < min) {
+        min = comprobacion;
+    }
+
+    if (comprobacion > max) {
+        max = comprobacion;
+    }
+    counter += comprobacion;
+}
+  end_t = clock();
+  total_t += (end_t - start_t);
+
+    /*Completamos la estructura tiempo*/
+
+    ptiempo->N = N;
+    ptiempo->n_elems = n_claves;
+    ptiempo->tiempo = (total_t / n_claves) / CLOCKS_PER_SEC;
+    ptiempo-> medio_ob = counter / n_claves;
+    ptiempo->min_ob = min;
+    ptiempo->max_ob = max;
+
+    free(tabla);
+    libera_diccionario(pdicc);
+    return OK;
+
+}

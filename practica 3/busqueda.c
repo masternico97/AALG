@@ -13,6 +13,7 @@
 
 #include <stdlib.h>
 #include <math.h>
+#include <stdio.h>
 
 /**
  *  Funciones de geracion de claves
@@ -72,9 +73,8 @@ int inserta_diccionario(PDICC pdicc, int clave)
   if(!pdicc || pdicc->n_datos == pdicc->tamanio) return ERR;
 
   pdicc->tabla[pdicc->n_datos]=clave;
-  pdicc->n_datos++;
 
-  if(pdicc->orden=ORDENADO){
+  if(pdicc->orden==ORDENADO){
     i=pdicc->n_datos-1;
     while (i >= 0 && pdicc->tabla[i]>clave){
       pdicc->tabla[i+1]=pdicc->tabla[i];
@@ -83,6 +83,7 @@ int inserta_diccionario(PDICC pdicc, int clave)
     }
     pdicc->tabla[i+1]=clave;
   }
+  pdicc->n_datos++;
   return OB;
 }
 
@@ -98,13 +99,14 @@ int insercion_masiva_diccionario (PDICC pdicc,int *claves, int n_claves)
     if(comprobacion == ERR) return ERR;
     OB+=comprobacion;
   }
+  return OB;
 }
 
 int busca_diccionario(PDICC pdicc, int clave, int *ppos, pfunc_busqueda metodo)
 {
-  int OB = 0;
+  int OB;
   if(!pdicc || !ppos || !metodo) return ERR;
-  metodo(pdicc->tabla,0,(pdicc->n_datos)-1,clave,ppos);
+  OB = metodo(pdicc->tabla,0,(pdicc->n_datos)-1,clave,ppos);
   return OB;
 }
 
@@ -120,7 +122,10 @@ int bbin(int *tabla,int P,int U,int clave,int *ppos)
     *ppos = (U+P)/2;
     OB++;
 
-    if(clave == tabla[*ppos]) return OB;
+    if(clave == tabla[*ppos]){
+      (*ppos)++;
+      return OB;
+    }
 
     else if(clave < tabla[*ppos]){
       U = (*ppos)-1;
@@ -139,12 +144,12 @@ int blin(int *tabla,int P,int U,int clave,int *ppos)
   if(!tabla || P>U || !ppos) return ERR;
 
   *ppos = 0;
-  while(clave != tabla[(*ppos)] || (*ppos)<=U){
+  while(clave != tabla[(*ppos)] && (*ppos)<=U){
     OB++;
     (*ppos)++;
   }
 
   if((*ppos)>U) return ERR;
-
+  (*ppos)++;
   return OB;
 }

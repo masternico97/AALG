@@ -31,7 +31,7 @@ int main(int argc, char** argv)
   int i, num_min,num_max,incr,n_veces;
   char nombre[256];
   short ret;
- 
+
   srand(time(NULL));
 
   if (argc != 11) {
@@ -70,9 +70,9 @@ int main(int argc, char** argv)
   }
 
   /* calculamos los tiempos */
-  ret = genera_tiempos_busqueda(blin, generador_claves_uniforme, NO_ORDENADO, 
+  ret = genera_tiempos_busqueda(blin, generador_claves_uniforme, NO_ORDENADO,
                                 nombre, num_min, num_max, incr, n_veces);
-  if (ret == ERR) { 
+  if (ret == ERR) {
     printf("Error en la funcion genera_tiempos_busqueda\n");
     exit(-1);
   }
@@ -81,4 +81,3 @@ int main(int argc, char** argv)
 
   return 0;
 }
-
