@@ -72,7 +72,7 @@ int aleat_num(int inf, int sup) {
 /***************************************************/
 int* genera_perm(int N) {
     int* perm = NULL;
-    int i;
+    int i,aleat;
 
     if (N < 1) {
         return NULL;
@@ -88,7 +88,9 @@ int* genera_perm(int N) {
     }
 
     for (i = 1; i <= N; i++) {
-        swap(&perm[i - 1], &perm[aleat_num(i - 1, N - 1)]);
+	aleat = aleat_num(i - 1, N - 1);
+	if(aleat == ERR)  return NULL;
+        swap(&perm[i - 1], &perm[aleat]);
     }
 
     return (perm);
