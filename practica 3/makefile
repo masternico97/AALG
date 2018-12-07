@@ -47,4 +47,4 @@ ejercicio1_test:
 
 ejercicio2_test:
 	@echo Ejecutando ejercicio2
-	@./ejercicio2 -num_min 1000 -num_max 10000 -incr 50 -n_veces 100 -fichSalida busqueda.dat
+	@./ejercicio2 -num_min 1000 -num_max 10000 -incr 50 -n_veces 100 -fichSalida busquedalin.dat

@@ -26,7 +26,7 @@
 short tiempo_medio_ordenacion(pfunc_ordena metodo, int n_perms, int N, PTIEMPO ptiempo) {
     int** matriz = NULL;
     int i, comprobacion, max, min;
-    double counter, start_t, end_t, total_t = 0;
+    double counter = 0, start_t, end_t, total_t = 0;
 
     if (!metodo || n_perms < 1 || N < 1 || !ptiempo) {
         return ERR;
@@ -37,16 +37,14 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo, int n_perms, int N, PTIEMPO p
         return ERR;
     }
 
-    counter = 0;
     min = INT_MAX;
     max = INT_MIN;
 
+    start_t = clock();
     for (i = 0; i < n_perms; i++) {
-
-        start_t = clock();
+       
         comprobacion = metodo(matriz[i], 0, N - 1);
-        end_t = clock();
-
+ 
         if (comprobacion == ERR) {
             for (i = n_perms; i >= 0; i--) {
                 free(matriz[i]);
@@ -62,9 +60,11 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo, int n_perms, int N, PTIEMPO p
         if (comprobacion > max) {
             max = comprobacion;
         }
-        total_t += (end_t - start_t);
         counter += comprobacion;
     }
+
+    end_t = clock();
+    total_t += (end_t - start_t);
 
     /*Completamos la estructura tiempo*/
 
@@ -132,7 +132,7 @@ short guarda_tabla_tiempos(char* fichero, PTIEMPO tiempo, int n_tiempos) {
     guardado = fopen(fichero, "w");
 
     for (i = 0; i < n_tiempos; i++) {
-        fprintf(guardado, "%d\t%f\t%.2f\t%d\t%d\n", tiempo[i].N, tiempo[i].tiempo, tiempo[i].medio_ob, tiempo[i].min_ob, tiempo[i].max_ob);
+        fprintf(guardado, "%d\t%.16f\t%.2f\t%d\t%d\n", tiempo[i].N, tiempo[i].tiempo, tiempo[i].medio_ob, tiempo[i].min_ob, tiempo[i].max_ob);
     }
 
     fclose(guardado);
@@ -178,7 +178,7 @@ short tiempo_medio_busqueda(pfunc_busqueda metodo, pfunc_generador_claves genera
   int ppos;
   int n_claves, i, min, max;
   short comprobacion;
-  double counter, start_t, end_t, total_t = 0;
+  double counter = 0, start_t, end_t, total_t = 0;
 
   if(!metodo || !generador || (orden != NO_ORDENADO && orden != ORDENADO) || N < 1 || n_veces < 1 || !ptiempo) return ERR;
 
@@ -238,8 +238,8 @@ short tiempo_medio_busqueda(pfunc_busqueda metodo, pfunc_generador_claves genera
 
     ptiempo->N = N;
     ptiempo->n_elems = n_claves;
-    ptiempo->tiempo = (total_t / n_claves) / CLOCKS_PER_SEC;
-    ptiempo-> medio_ob = counter / n_claves;
+    ptiempo->tiempo = ((total_t / n_claves) / CLOCKS_PER_SEC);
+    ptiempo-> medio_ob = (counter / n_claves);
     ptiempo->min_ob = min;
     ptiempo->max_ob = max;
 

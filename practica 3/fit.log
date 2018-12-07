@@ -1,0 +1,60 @@
+
+
+*******************************************************************************
+Fri Dec  7 12:11:16 2018
+
+
+FIT:    data read from "busquedabin.dat" using 1:3
+        format = x:z
+        #datapoints = 181
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = log(x) + a
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 6.0113680097e+02   0.00e+00  1.00e+00    1.000000e+00
+   3 1.2059603929e+01  -4.50e-07  1.00e-03    2.804043e+00
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 12.0596
+rel. change during last iteration : -4.50128e-12
+
+degrees of freedom    (FIT_NDF)                        : 180
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.258839
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0669978
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.80404          +/- 0.01924      (0.6861%)
+
+
+*******************************************************************************
+Fri Dec  7 12:13:06 2018
+
+
+FIT:    data read from "busquedabin.dat" using 1:3
+        format = x:z
+        #datapoints = 181
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = log(x) + a
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 1.2059603929e+01   0.00e+00  2.80e+00    2.804043e+00
+   1 1.2059603929e+01  -8.84e-11  2.80e+01    2.804043e+00
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 12.0596
+rel. change during last iteration : -8.83789e-16
+
+degrees of freedom    (FIT_NDF)                        : 180
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.258839
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0669978
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.80404          +/- 0.01924      (0.6861%)
