@@ -168,11 +168,13 @@ int merge(int* tabla, int ip, int iu, int imedio) {
 /***************************************************/
 /* Funcion: MergeSort    Fecha:26/10/2018          */
 /* Vuestro comentario: 			           */
+
 /***************************************************/
 
 
 int MergeSort(int* tabla, int ip, int iu) {
     int M;
+    int comprobacion1, comprobacion2, comprobacion3;
     if ((!tabla) || (ip < 0) || (iu < ip)) {
         return ERR;
     }
@@ -180,7 +182,11 @@ int MergeSort(int* tabla, int ip, int iu) {
         return 0;
     } else {
         M = (ip + iu) / 2;
-        return MergeSort(tabla, ip, M) + MergeSort(tabla, M + 1, iu) + merge(tabla, ip, iu, M);
+	comprobacion1 = MergeSort(tabla, ip, M);
+	comprobacion2 = MergeSort(tabla, M + 1, iu);
+	comprobacion3 = merge(tabla, ip, iu, M);
+	if(comprobacion1 == ERR || comprobacion2 == ERR || comprobacion3 == ERR) return ERR;
+        return comprobacion1 + comprobacion2 + comprobacion3;
     }
 }
 
@@ -240,6 +246,7 @@ int partir(int* tabla, int ip, int iu, int *pos) {
 /***************************************************/
 /* Funcion: QuickSort    Fecha:26/10/2018          */
 /* Vuestro comentario: 			           */
+
 /***************************************************/
 
 int QuickSort(int* tabla, int ip, int iu) {
@@ -297,7 +304,7 @@ int QuickSort_src(int* tabla, int ip, int iu) {
     }
 
     if (ip < pos - 1) {
-        comprobacion = QuickSort(tabla, ip, pos - 1);
+        comprobacion = QuickSort_src(tabla, ip, pos - 1);
         if (comprobacion == ERR) {
             return ERR;
         }
@@ -314,7 +321,7 @@ int QuickSort_src(int* tabla, int ip, int iu) {
         }
         comprobacion = partir(tabla, ip, iu, &pos);
         if (ip < pos - 1) {
-            comprobacion += QuickSort(tabla, ip, pos - 1);
+            comprobacion += QuickSort_src(tabla, ip, pos - 1);
         }
         if (comprobacion == ERR) {
             return ERR;
